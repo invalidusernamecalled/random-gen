@@ -9,7 +9,7 @@ set rand=%RANDOM%
 :repeat
 set chrcount=0
 for /l %%i in (1,1,%number%) do (
-if !chrcount! GTR %number% goto :eof
+if !chrcount! GTR %number% goto next
 set /a chrcount+=1
 call :math %%i
 CALL set result=!result!%%realset:~!num!,1%%
@@ -21,4 +21,5 @@ goto :eof
 :math
 for /f "tokens=1,4 delims=:." %%i in ("%time%") do set /a num=(rand*!RANDOM!*(%1+1)*7919+%%i%%j) %% numrealset
 if !num! LSS 0 set /a num=-num
+
 goto :eof
