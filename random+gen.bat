@@ -1,7 +1,7 @@
 @echo off
 setlocal enabledelayedexpansion
-set realset=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
-set numrealset=52
+set realset=abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ
+set numrealset=62
 set number=%~1
 set result=
 set rand=%RANDOM%
@@ -19,8 +19,6 @@ set result="!result:~0,%number%!"
 for /f "tokens=*" %%i in (!result!) do (echo %%~i)
 goto :eof
 :math
-set syk=%time:.=%
-set syk=%syk::=%
-set /a num=(rand*!RANDOM!*(%1+1)*7919+%syk%) %% numrealset
+for /f "tokens=1,4 delims=:." %%i in ("%time%") do set /a num=(rand*!RANDOM!*(%1+1)*7919+%%i%%j) %% numrealset
 if !num! LSS 0 set /a num=-num
 goto :eof
