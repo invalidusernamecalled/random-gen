@@ -22,11 +22,12 @@ set result="!result:~0,%number%!"
 for /f "tokens=*" %%i in (!result!) do (echo %%~i)
 goto :eof
 :math
-REM if %counternumset% GTR %numrealset% set /a counternumset=1
 for /f "tokens=1,4 delims=:. " %%i in ("%time%") do set /a num=(rand*!RANDOM!*(%1+1)*7919+1%%i%%j) %% numrealset
-set /a counternumset+=1
-CALL set "test=%%realset:~!num!,1%%"
-if "!test!" NEQ "" (for /f "delims=" %%i in ("!test!") do set realset=!realset:%%i=!&set /a numrealset-=1&set /a chrcount+=1) 
-if "!realset!" == ""  set realset=%backupset%&set /a numrealset=numbackupset
+set /a total=chrcount+numrealset
+set test=
 if !num! LSS 0 set /a num=-num
+set /a next=num+1
+CALL set "test=%%realset:~!num!,1%%"
+if "!test!" NEQ "" (for /f "tokens=1,2" %%i in ("!num! !next!") do set realset=!realset:~0,%%i!!realset:~%%j!&set /a numrealset-=1&set /a chrcount+=1)
+if "!realset!" == ""  set realset=%backupset%&set /a numrealset=numbackupset
 goto :eof
