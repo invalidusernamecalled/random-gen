@@ -1,5 +1,5 @@
 Example:-
 ```
 "random+gen.bat" 10
-RkeLSy7rYu
+P\ucA-y#e4
 ```
