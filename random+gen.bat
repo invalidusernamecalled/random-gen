@@ -30,4 +30,6 @@ set /a next=num+1
 CALL set "test=%%realset:~!num!,1%%"
 if "!test!" NEQ "" (for /f "tokens=1,2" %%i in ("!num! !next!") do set realset=!realset:~0,%%i!!realset:~%%j!&set /a numrealset-=1&set /a chrcount+=1)
 if "!realset!" == ""  set realset=%backupset%&set /a numrealset=numbackupset
+
 goto :eof
+REM 'Behold, The Hand of God !!!
